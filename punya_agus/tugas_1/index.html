@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cek Bilangan Prima</title>
+</head>
+<body>
+    <h1>Cek Bilangan Prima</h1>
+    <form>
+        <label for="bilangan">Masukkan bilangan: </label>
+        <input type="number" id="bilangan" name="bilangan" required>
+        <button type="button" onclick="cekPrima()">Cek</button>
+    </form>
+    <p id="hasil"></p>
+
+    <script>
+        function cekPrima() {
+            const bilanganInput = document.getElementById("bilangan");
+            const hasilPesan = document.getElementById("hasil");
+            const bilangan = parseInt(bilanganInput.value);
+
+            if (isNaN(bilangan)) {
+                hasilPesan.innerHTML = "Masukkan bilangan yang valid.";
+                return;
+            }
+
+            if (bilangan <= 1) {
+                hasilPesan.innerHTML = `${bilangan} bukan bilangan prima.`;
+                return;
+            }
+
+            let prima = true;
+            for (let i = 2; i <= Math.sqrt(bilangan); i++) {
+                if (bilangan % i === 0) {
+                    prima = false;
+                    break;
+                }
+            }
+
+            if (prima) {
+                hasilPesan.innerHTML = `${bilangan} adalah bilangan prima.`;
+            } else {
+                hasilPesan.innerHTML = `${bilangan} bukan bilangan prima.`;
+            }
+        }
+    </script>
+</body>
+</html>

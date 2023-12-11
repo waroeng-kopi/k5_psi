@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checker Kata Sandi</title>
+</head>
+<body>
+    <h1>Checker Kata Sandi</h1>
+    <p>Masukkan kata sandi dan klik tombol "Cek" untuk memeriksa apakah kata sandi memenuhi kriteria.</p>
+
+    <form id="passwordForm">
+        <label for="password">Kata Sandi:</label>
+        <input type="password" id="password" name="password" required>
+        <button type="button" onclick="checkPassword()">Cek</button>
+    </form>
+
+    <div id="errorMessage" style="color: red;"></div>
+
+    <script>
+        function checkPassword() {
+            const password = document.getElementById("password").value;
+            const errorMessage = document.getElementById("errorMessage");
+            const result = checkPasswordCriteria(password);
+
+            if (result === "Kata sandi memenuhi semua kriteria.") {
+                errorMessage.innerText = "";
+                alert(result);
+            } else {
+                errorMessage.innerText = result;
+            }
+        }
+
+        function checkPasswordCriteria(password) {
+            const hasUpperCase = /[A-Z]/.test(password);
+            const hasLowerCase = /[a-z]/.test(password);
+            const hasDigit = /\d/.test(password);
+            const hasSpecialChar = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/.test(password);
+            const isLengthValid = password.length >= 8;
+
+            let errorMessage = "";
+
+            if (!hasUpperCase) {
+                errorMessage += "Kata sandi harus memiliki setidaknya satu huruf besar.\n";
+            }
+
+            if (!hasLowerCase) {
+                errorMessage += "Kata sandi harus memiliki setidaknya satu huruf kecil.\n";
+            }
+
+            if (!hasDigit) {
+                errorMessage += "Kata sandi harus mengandung setidaknya satu angka.\n";
+            }
+
+            if (!hasSpecialChar) {
+                errorMessage += "Kata sandi harus mengandung karakter unik.\n";
+            }
+
+            if (!isLengthValid) {
+                errorMessage += "Kata sandi harus memiliki panjang minimal 8 karakter.\n";
+            }
+
+            return errorMessage.trim();
+        }
+    </script>
+</body>
+</html>
