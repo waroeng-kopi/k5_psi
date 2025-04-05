@@ -1,0 +1,6 @@
+<?php
+  include "../model/koneksi.php";
+  $kode_kategori=$_POST['kode_kategori'];
+  $nama_kategori=$_POST['nama_kategori'];
+  $query=mysqli_query($koneksi,"UPDATE tb_kategori SET id_kategori='$kode_kategori', nama_kategori='$nama_kategori' WHERE id_kategori='$kode_kategori'");
+  header('location:../data_kategori.php');
